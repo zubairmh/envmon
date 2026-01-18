@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+
 	"envmon/internal/cli"
 )
 
@@ -10,16 +11,25 @@ func main() {
 	args := os.Args[1:]
 
 	if len(args) == 0 {
-		fmt.Println("Usage: envmon <command>")
-		os.Exit(1)
+		if err := cli.ShowCurrentDeployment(); err != nil {
+			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+			os.Exit(1)
+		}
+		return
 	}
 
 	switch args[0] {
 	case "help", "-h", "--help":
 		cli.ShowHelp()
 	case "configs":
-		fmt.Println("TODO")
+		if err := cli.ShowConfigs(); err != nil {
+			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+			os.Exit(1)
+		}
 	default:
-		fmt.Println(args[0])
+		if err := cli.SwitchDeployment(args[0]); err != nil {
+			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+			os.Exit(1)
+		}
 	}
 }
