@@ -36,6 +36,8 @@ I built this tool because I often found myself manually commenting/uncommenting 
 
 This became very time consuming as the env file would be over a thousand lines, and I would often be left doubtful whether I had mixed some of the staging/production keys
 
+Please refer to the `.env.example` file to understand why this tool is needed
+
 ### Design Choices
 
 - should be very easy to use, with zero/near to no changes in existing pipeline
