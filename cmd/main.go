@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"os"
+	"envmon/internal/cli"
 )
-
 
 func main() {
 	args := os.Args[1:]
@@ -15,7 +15,11 @@ func main() {
 	}
 
 	switch args[0] {
-	case "help":
+	case "help", "-h", "--help":
+		cli.ShowHelp()
+	case "configs":
 		fmt.Println("TODO")
+	default:
+		fmt.Println(args[0])
 	}
 }
