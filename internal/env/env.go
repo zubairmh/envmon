@@ -41,7 +41,7 @@ func ReadLines() ([]Line, error) {
 	if err != nil {
 		return nil, fmt.Errorf("could not open .env file: %w", err)
 	}
-	defer file.Close()
+	defer func() { _ = file.Close() }()
 
 	var lines []Line
 	var currentRule *parser.FlagRule
@@ -130,7 +130,7 @@ func GetConfigs() ([]string, error) {
 	if err != nil {
 		return nil, fmt.Errorf("could not open .env file: %w", err)
 	}
-	defer file.Close()
+	defer func() { _ = file.Close() }()
 
 	configs := make(map[string]bool)
 	scanner := bufio.NewScanner(file)
@@ -163,7 +163,7 @@ func GetCurrentDeployment() (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("could not open .env file: %w", err)
 	}
-	defer file.Close()
+	defer func() { _ = file.Close() }()
 
 	flagActivity := make(map[string]int)
 	allFlags := make(map[string]bool)
